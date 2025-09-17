@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const repulsionSound = new Audio('space_sound.mp3');
+let lastSoundMouseX = -1; // Initialize with a value unlikely to be a valid coordinate
+let lastSoundMouseY = -1; // Initialize with a value unlikely to be a valid coordinate
 
     // --- Codice esistente per animazioni allo scroll e nav links ---
     const animatedElements = document.querySelectorAll('.service-card, #about .container, #contact .container');
@@ -65,10 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (dist < repulsionRadius) {
                         this.x += (dx / dist) * force * 7; // Increased force
                         this.y += (dy / dist) * force * 7; // Increased force
-                        if (repulsionSound.paused || repulsionSound.ended) { // Check if sound is not playing
+                        if ((repulsionSound.paused || repulsionSound.ended) && (mouse.x !== lastSoundMouseX || mouse.y !== lastSoundMouseY)) { // Check if sound is not playing AND mouse moved
                             repulsionSound.currentTime = 0; // Rewind to start
-                         repulsionSound.play();
-
+                            repulsionSound.play();
+                            lastSoundMouseX = mouse.x; // Update last played mouse coordinates
+                            lastSoundMouseY = mouse.y; // Update last played mouse coordinates
                         }
                     }
                 }
