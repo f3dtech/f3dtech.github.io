@@ -72,6 +72,7 @@ let canPlaySound = true; // Flag to control sound playback
                             canPlaySound = false; // Prevent immediate re-play
                             repulsionSound.currentTime = 0; // Rewind to start
                             repulsionSound.play();
+                                canPlaySound = true; // Allow sound to play again after 500ms
                             lastSoundMouseX = mouse.x; // Update last played mouse coordinates
                             lastSoundMouseY = mouse.y; // Update last played mouse coordinates
                         }
