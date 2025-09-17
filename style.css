@@ -181,3 +181,26 @@ footer {
     width: 100%;
     position: absolute;
 }
+
+/* Footer Social Icons */
+.social-icons a {
+    margin: 0 15px;
+    display: inline-block;
+}
+.social-icons svg {
+    fill: var(--text-color);
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+.social-icons a:hover svg {
+    fill: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Navbar Brand Social Icons */
+.navbar-brand svg {
+    fill: currentColor; /* Inherit color from parent */
+    transition: fill 0.3s ease;
+}
+.navbar-brand a:hover svg {
+    fill: var(--primary-color);
+}
