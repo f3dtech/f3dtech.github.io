@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    const repulsionSound = new Audio('space_sound.mp3');
+
     // --- Codice esistente per animazioni allo scroll e nav links ---
     const animatedElements = document.querySelectorAll('.service-card, #about .container, #contact .container');
     const observer = new IntersectionObserver((entries) => {
@@ -63,6 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (dist < repulsionRadius) {
                         this.x += (dx / dist) * force * 7; // Increased force
                         this.y += (dy / dist) * force * 7; // Increased force
+                        if (repulsionSound.paused || repulsionSound.ended) { // Check if sound is not playing
+                            repulsionSound.currentTime = 0; // Rewind to start
+                         repulsionSound.play();
+
+                        }
                     }
                 }
                 
@@ -92,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const sx = ((this.x - centerX) * (canvas.width / this.z)) + centerX;
                 const sy = ((this.y - centerY) * (canvas.width / this.z)) + centerY;
-                
+
                 const r = Math.max(0.1, (1 - this.z / canvas.width) * 2.5);
 
                 ctx.beginPath();
