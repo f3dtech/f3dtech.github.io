@@ -29,87 +29,129 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Nuovo codice per l'animazione delle particelle ---
+    // --- Codice per l'animazione "Starfield" con effetto buco nero e sfondo trasparente ---
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let stars = [];
+        let mouse = { x: undefined, y: undefined };
 
         const setupCanvas = () => {
             canvas.width = canvas.parentElement.offsetWidth;
             canvas.height = canvas.parentElement.offsetHeight;
         };
 
-        class Particle {
+        class Star {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = Math.random() * 1 - 0.5;
-                this.vy = Math.random() * 1 - 0.5;
-                this.radius = 2;
+                this.z = Math.random() * canvas.width;
+                this.pz = this.z;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
             }
 
-            update() {
+            update(mouse) {
+                // Mouse repulsion
+                if (mouse.x !== undefined && mouse.y !== undefined) {
+                    const dx = this.x - mouse.x;
+                    const dy = this.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const repulsionRadius = 150; // Increased radius
+                    const force = Math.max(0, (repulsionRadius - dist) / repulsionRadius);
+
+                    if (dist < repulsionRadius) {
+                        this.x += (dx / dist) * force * 7; // Increased force
+                        this.y += (dy / dist) * force * 7; // Increased force
+                    }
+                }
+                
+                // Add original velocity
                 this.x += this.vx;
                 this.y += this.vy;
 
+                // Z-axis movement (depth)
+                this.z -= 1;
+                if (this.z < 1) {
+                    this.z = canvas.width;
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.pz = this.z;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                }
+
+                // Wall bouncing
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
 
             draw() {
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+
+                const sx = ((this.x - centerX) * (canvas.width / this.z)) + centerX;
+                const sy = ((this.y - centerY) * (canvas.width / this.z)) + centerY;
+                
+                const r = Math.max(0.1, (1 - this.z / canvas.width) * 2.5);
+
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.arc(sx, sy, r, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
                 ctx.fill();
+
+                const prev_sx = ((this.x - this.vx - centerX) * (canvas.width / this.pz)) + centerX;
+                const prev_sy = ((this.y - this.vy - centerY) * (canvas.width / this.pz)) + centerY;
+
+                ctx.beginPath();
+                ctx.moveTo(prev_sx, prev_sy);
+                ctx.lineTo(sx, sy);
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = r;
+                ctx.stroke();
+
+                this.pz = this.z;
             }
         }
 
-        const createParticles = () => {
-            particles = [];
-            let numberOfParticles = Math.floor(canvas.width / 15);
-            for (let i = 0; i < numberOfParticles; i++) {
-                particles.push(new Particle());
-            }
-        };
-
-        const connectParticles = () => {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 100})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
+        const createStars = () => {
+            stars = [];
+            let numberOfStars = 1000; // The denser version
+            for (let i = 0; i < numberOfStars; i++) {
+                stars.push(new Star());
             }
         };
 
         const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Transparent background
+
+            stars.forEach(star => {
+                star.update(mouse);
+                star.draw();
             });
-            connectParticles();
+
             requestAnimationFrame(animate);
         };
 
         window.addEventListener('resize', () => {
             setupCanvas();
-            createParticles();
+            createStars();
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
         });
 
         // Inizializzazione
         setupCanvas();
-        createParticles();
+        createStars();
         animate();
     }
 });
