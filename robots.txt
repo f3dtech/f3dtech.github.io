@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://f3dtech.github.io/sitemap.xml
