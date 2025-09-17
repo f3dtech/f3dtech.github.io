@@ -164,3 +164,20 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Stili per la mappa reattiva */
+.map-responsive {
+    overflow: hidden;
+    border-radius: 15px; /* Match card style */
+    border: 1px solid var(--primary-color);
+    height: 400px;
+    position: relative;
+}
+
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
