@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const repulsionSound = new Audio('space_sound.mp3');
 let lastSoundMouseX = -1; // Initialize with a value unlikely to be a valid coordinate
 let lastSoundMouseY = -1; // Initialize with a value unlikely to be a valid coordinate
+let canPlaySound = true; // Flag to control sound playback
 
     // --- Codice esistente per animazioni allo scroll e nav links ---
     const animatedElements = document.querySelectorAll('.service-card, #about .container, #contact .container');
@@ -67,9 +68,12 @@ let lastSoundMouseY = -1; // Initialize with a value unlikely to be a valid coor
                     if (dist < repulsionRadius) {
                         this.x += (dx / dist) * force * 7; // Increased force
                         this.y += (dy / dist) * force * 7; // Increased force
-                        if ((repulsionSound.paused || repulsionSound.ended) && (mouse.x !== lastSoundMouseX || mouse.y !== lastSoundMouseY)) { // Check if sound is not playing AND mouse moved
+                        if (canPlaySound && (repulsionSound.paused || repulsionSound.ended) && (mouse.x !== lastSoundMouseX || mouse.y !== lastSoundMouseY)) { // Check if sound can play, is not playing, AND mouse moved
+                            canPlaySound = false; // Prevent immediate re-play
                             repulsionSound.currentTime = 0; // Rewind to start
                             repulsionSound.play();
+                                repulsionSound.pause();
+                                canPlaySound = true; // Allow sound to play again after 500ms
                             lastSoundMouseX = mouse.x; // Update last played mouse coordinates
                             lastSoundMouseY = mouse.y; // Update last played mouse coordinates
                         }
