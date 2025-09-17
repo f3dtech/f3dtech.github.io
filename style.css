@@ -1,0 +1,166 @@
+:root {
+    --primary-color: #f0f;
+    --secondary-color: #8a2be2;
+    --tertiary-color: #007bff;
+    --dark-bg: rgba(0, 0, 0, 0.7);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --text-color: #fff;
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background: linear-gradient(270deg, #ff00a0, #8a2be2, #007bff, #ff7f00);
+    background-size: 800% 800%;
+    animation: gradientAnimation 20s ease infinite;
+    padding-top: 56px;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.navbar {
+    background-color: var(--dark-bg);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand img {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.1);
+}
+
+.nav-link {
+    font-family: var(--font-display);
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.hero-section {
+    height: 100vh;
+    background: url('4k.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+#hero #particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-title, .hero-subtitle {
+    position: relative;
+    z-index: 3;
+    text-shadow: 0 0 15px rgba(0,0,0,0.7);
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    color: var(--text-color);
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+#services, #contact {
+    background-color: transparent;
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+.service-card h3 {
+    font-family: var(--font-display);
+    color: var(--primary-color);
+}
+
+.bg-dark-alpha {
+    background-color: var(--dark-bg);
+    backdrop-filter: blur(5px);
+}
+
+.form-control {
+    background-color: var(--card-bg);
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-family: var(--font-display);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff0055;
+    border-color: #ff0055;
+    box-shadow: 0 0 15px #ff0055;
+}
+
+footer {
+    background-color: var(--dark-bg);
+}
+
+/* Animazioni */
+.service-card, #about .container, #contact .container {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.service-card.visible, #about .container.visible, #contact .container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

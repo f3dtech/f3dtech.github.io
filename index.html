@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F3D Tech - Riparazione e Vendita PC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="Logo.svg" alt="F3D Tech Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Servizi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Chi Siamo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contatti</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="hero" class="hero-section text-white text-center d-flex flex-column justify-content-center align-items-center">
+        <canvas id="particle-canvas"></canvas>
+        <div class="container">
+            <h1 class="display-3 hero-title">F3D TECH</h1>
+            <p class="lead hero-subtitle">Il tuo punto di riferimento per PC, assistenza e performance.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="services" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5 section-title">I Nostri Servizi</h2>
+                <div class="row text-center">
+                    <div class="col-lg-4 mb-4">
+                        <div class="service-card">
+                            <h3>Assemblaggio PC</h3>
+                            <p>Creiamo computer su misura per gaming, lavoro o tempo libero, ottimizzati per le tue esigenze.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="service-card">
+                            <h3>Riparazione</h3>
+                            <p>Risolviamo problemi hardware e software su PC di ogni marca, con diagnosi rapide e precise.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="service-card">
+                            <h3>Vendita Componenti</h3>
+                            <p>Offriamo una vasta selezione di componenti di alta qualità per l'upgrade del tuo computer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-5 bg-dark-alpha">
+            <div class="container">
+                <h2 class="text-center mb-4 section-title">Chi Siamo</h2>
+                <p class="text-center lead">Siamo un team di appassionati di tecnologia con anni di esperienza nel settore. La nostra missione è offrire soluzioni informatiche personalizzate e un servizio clienti impeccabile, costruendo un rapporto di fiducia con chiunque entri nel nostro negozio.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4 section-title">Contattaci</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Nome">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="4" placeholder="Il tuo messaggio"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Invia Messaggio</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-4 text-center">
+        <p>&copy; 2025 F3D Tech. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
