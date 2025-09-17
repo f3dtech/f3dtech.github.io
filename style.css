@@ -46,12 +46,11 @@ body {
     color: var(--primary-color);
 }
 
-.hero-section {
-    height: 100vh;
-    background: url('4k.png') no-repeat center center;
-    background-size: cover;
-    position: relative;
-}
+    .hero-section {
+        height: 100vh;
+        background: transparent; /* Remove the image */
+        position: relative;
+    }
 
 #hero #particle-canvas {
     position: absolute;
@@ -203,4 +202,13 @@ footer {
 }
 .navbar-brand a:hover svg {
     fill: var(--primary-color);
+}
+
+/* Hero Logo */
+.hero-logo {
+    max-width: 80%; /* Adjust as needed */
+    height: auto;
+    display: block; /* To center with margin auto */
+    margin: 0 auto;
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.7)); /* Similar to text-shadow */
 }
